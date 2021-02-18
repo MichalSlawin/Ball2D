@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 500f;
     private Vector2 target;
     private bool isOnPlatform = false;
     private Vector2 respawn;
-    private float fellOffPoint = -10f;
+    private float fellOffPoint = -20f;
     private int points = 0;
+    private float moveClickOffset = 1f;
     Rigidbody2D playerRigidbody;
 
     // Start is called before the first frame update
@@ -36,14 +37,13 @@ public class PlayerController : MonoBehaviour
         transform.position = respawn;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         GameObject collisionObj = collision.gameObject;
 
         if (collisionObj.CompareTag("Platform"))
         {
             isOnPlatform = true;
-            Debug.Log("platform enter");
         }
     }
 
@@ -64,34 +64,54 @@ public class PlayerController : MonoBehaviour
 
         if (collisionObj.CompareTag("Point"))
         {
+            respawn = collisionObj.transform.position;
             Destroy(collisionObj);
             points++;
+        }
+
+        if (collisionObj.CompareTag("Death"))
+        {
+            HandleDeath();
         }
     }
 
     private void HandleClick()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && GetClickedObjTag() != "Player")
         {
             target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(target.x, transform.position.y), moveSpeed * Time.deltaTime);
+            float direction = 0;
+            if (target.x > transform.position.x + moveClickOffset) direction = 1;
+            else if (target.x < transform.position.x - moveClickOffset) direction = -1;
+
+            playerRigidbody.velocity = new Vector2(direction * moveSpeed, playerRigidbody.velocity.y);
         }
 
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonUp(0))
         {
-            target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(target, Vector2.zero);
-            GameObject selectedObject = null;
-            if(hit.collider != null)
+            playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (GetClickedObjTag() == "Player" && isOnPlatform)
             {
-                selectedObject = hit.collider.gameObject;
-            }
-            
-            if (selectedObject != null && selectedObject.CompareTag("Player") && isOnPlatform)
-            {
-                playerRigidbody.AddForce(new Vector2(0, jumpForce));
+                playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpForce);
             }
         }
+    }
+
+    private string GetClickedObjTag()
+    {
+        target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(target, Vector2.zero);
+
+        if (hit.collider != null)
+        {
+            return hit.collider.gameObject.tag;
+        }
+
+        return "";
     }
 }

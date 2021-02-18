@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Platform
   - Point
+  - Death
   layers:
   - Default
   - TransparentFX
