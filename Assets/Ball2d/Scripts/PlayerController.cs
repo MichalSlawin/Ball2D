@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private void HandleDeath()
     {
         transform.position = respawn;
+        points--;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -55,7 +56,7 @@ public class PlayerController : MonoBehaviour
 
         if (collisionObj.CompareTag("Finish"))
         {
-            Debug.Log("finished");
+            Debug.Log("score: " + points);
         }
     }
 
@@ -76,7 +77,6 @@ public class PlayerController : MonoBehaviour
 
         if (collisionObj.CompareTag("Point"))
         {
-            respawn = collisionObj.transform.position;
             Destroy(collisionObj);
             points++;
         }
