@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 target;
     private bool isOnPlatform = false;
     private Vector2 respawn;
-    private float fellOffPoint = -200f;
+    private float fellOffPoint = -20f;
     private int points = 0;
     private float moveClickOffset = 1f;
     Rigidbody2D playerRigidbody;
