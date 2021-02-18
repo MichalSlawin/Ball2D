@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 target;
     private bool isOnPlatform = false;
     private Vector2 respawn;
-    private float fellOffPoint = -20f;
+    private float fellOffPoint = -200f;
     private int points = 0;
     private float moveClickOffset = 1f;
     Rigidbody2D playerRigidbody;
@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 60;
+
         respawn = transform.position;
         playerRigidbody = transform.gameObject.GetComponent<Rigidbody2D>();
     }
@@ -44,6 +46,16 @@ public class PlayerController : MonoBehaviour
         if (collisionObj.CompareTag("Platform"))
         {
             isOnPlatform = true;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject collisionObj = collision.gameObject;
+
+        if (collisionObj.CompareTag("Finish"))
+        {
+            Debug.Log("finished");
         }
     }
 
