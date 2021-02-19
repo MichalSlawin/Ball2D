@@ -93,9 +93,17 @@ public class PlayerController : MonoBehaviour
         {
             target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+            Transform parent = transform.parent;
+            if (parent != null)
+            {
+                transform.parent = null;
+            }
+
             float direction = 0;
             if (target.x > transform.position.x + moveClickOffset) direction = 1;
             else if (target.x < transform.position.x - moveClickOffset) direction = -1;
+
+            transform.parent = parent;
 
             playerRigidbody.velocity = new Vector2(direction * moveSpeed, playerRigidbody.velocity.y);
         }

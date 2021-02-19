@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 3301723580937669797}
   - component: {fileID: 4916269538795973068}
   - component: {fileID: 4006834312642105658}
+  - component: {fileID: 1560939613}
+  - component: {fileID: 1560939612}
   m_Layer: 0
-  m_Name: ShortStraight
+  m_Name: ShortMovable
   m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 266737502097550497}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.04, y: -0.36, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,7 +77,7 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_MaskInteraction: 0
-  m_ShapeTexture: {fileID: 10309, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShapeTexture: {fileID: 2800000, guid: 4dd8823b4bb091143a6b0e15ba45a97a, type: 3}
   m_Sprites: []
   m_LocalAABB:
     m_Center: {x: 3.0000002, y: -1.0000001, z: 0}
@@ -172,3 +174,40 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.0000005, y: 2.0000002}
   m_EdgeRadius: 0
+--- !u!50 &1560939613
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266737502097550497}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &1560939612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266737502097550497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f080ef3586cf8f4d97fa615cf2a41f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveDistanceX: -8
+  moveDistanceY: 0
+  moveTime: 2
+  waitTime: 0
