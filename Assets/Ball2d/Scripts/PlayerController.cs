@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private bool isOnPlatform = false;
     private Vector2 respawn;
     private float fellOffPoint = -20f;
+    private float fellOffPointUp = 50f;
     private int points = 0;
     private float moveClickOffset = 1f;
     Rigidbody2D playerRigidbody;
@@ -28,7 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleClick();
 
-        if(transform.position.y < fellOffPoint)
+        if(transform.position.y < fellOffPoint || transform.position.y > fellOffPointUp)
         {
             HandleDeath();
         }
@@ -36,6 +37,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleDeath()
     {
+        playerRigidbody.velocity = Vector2.zero;
+        playerRigidbody.gravityScale = 1;
         transform.position = respawn;
         points--;
     }
@@ -57,6 +60,11 @@ public class PlayerController : MonoBehaviour
         if (collisionObj.CompareTag("Finish"))
         {
             Debug.Log("score: " + points);
+        }
+
+        if (collisionObj.CompareTag("GravityChange"))
+        {
+            playerRigidbody.gravityScale *= -1;
         }
     }
 
@@ -84,6 +92,11 @@ public class PlayerController : MonoBehaviour
         if (collisionObj.CompareTag("Death"))
         {
             HandleDeath();
+        }
+
+        if (collisionObj.CompareTag("Respawn"))
+        {
+            respawn = transform.position;
         }
     }
 
@@ -117,7 +130,9 @@ public class PlayerController : MonoBehaviour
         {
             if (GetClickedObjTag() == "Player" && isOnPlatform)
             {
-                playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpForce);
+                float direction = 1;
+                if (playerRigidbody.gravityScale < 0) direction = -1;
+                playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpForce * direction);
             }
         }
     }
