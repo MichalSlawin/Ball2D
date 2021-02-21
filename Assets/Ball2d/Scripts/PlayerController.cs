@@ -74,6 +74,29 @@ public class PlayerController : MonoBehaviour
         {
             jumpForce *= jumpMultiplier;
         }
+
+        if (collisionObj.CompareTag("Bounce"))
+        {
+            Vector3 bounceRotation = collisionObj.transform.rotation.eulerAngles;
+
+            if (V3Equal(bounceRotation, new Vector3(0,0,45)))
+            {
+                Jump(-jumpForce);
+            }
+            else if (V3Equal(bounceRotation, new Vector3(0, 0, 315))) // -45
+            {
+                jumpForce *= jumpMultiplier;
+                Jump(jumpForce);
+                jumpForce /= jumpMultiplier;
+            }
+            else
+            {
+                jumpForce *= jumpMultiplier;
+                Jump(0);
+                jumpForce /= jumpMultiplier;
+            }
+            
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -144,9 +167,7 @@ public class PlayerController : MonoBehaviour
 
             if ((GetClickedObjTag() == "Player" || (target.x > transform.position.x - moveClickOffset && target.x < transform.position.x + moveClickOffset)) && isOnPlatform)
             {
-                float direction = 1;
-                if (playerRigidbody.gravityScale < 0) direction = -1;
-                playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpForce * direction);
+                Jump(0);
             }
         }
     }
@@ -162,5 +183,17 @@ public class PlayerController : MonoBehaviour
         }
 
         return "";
+    }
+
+    private void Jump(float xValue)
+    {
+        float direction = 1;
+        if (playerRigidbody.gravityScale < 0) direction = -1;
+        playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x + xValue, jumpForce * direction);
+    }
+
+    public bool V3Equal(Vector3 a, Vector3 b)
+    {
+        return Vector3.SqrMagnitude(a - b) < 0.0001;
     }
 }

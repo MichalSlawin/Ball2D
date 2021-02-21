@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 4916269538795973068}
   - component: {fileID: 4006834312642105658}
   m_Layer: 0
-  m_Name: ShortFinish
-  m_TagString: Finish
+  m_Name: BouncePlatform
+  m_TagString: Bounce
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 266737502097550497}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.04, y: -0.36, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -73,9 +73,9 @@ SpriteShapeRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Color: {r: 0.764151, g: 0.764151, b: 0.764151, a: 1}
+  m_Color: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 1}
   m_MaskInteraction: 0
-  m_ShapeTexture: {fileID: 2800000, guid: af9110e912f5c2a42b9b4d4f2e16ed5b, type: 3}
+  m_ShapeTexture: {fileID: 2800000, guid: 88c8dbc45146744418c22cc929a3a14f, type: 3}
   m_Sprites: []
   m_LocalAABB:
     m_Center: {x: 3.0000002, y: -1.0000001, z: 0}
@@ -131,7 +131,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
-  m_SpriteShape: {fileID: 11400000, guid: fee63d3adc5b03841aac4ce1767730b7, type: 2}
+  m_SpriteShape: {fileID: 11400000, guid: d2cf60fb48d57d248bc97dafed3a3270, type: 2}
   m_FillPixelPerUnit: 100
   m_StretchTiling: 1
   m_SplineDetail: 16
