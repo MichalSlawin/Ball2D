@@ -12,11 +12,9 @@ GameObject:
   - component: {fileID: 3301723580937669797}
   - component: {fileID: 4916269538795973068}
   - component: {fileID: 4006834312642105658}
-  - component: {fileID: 1560939613}
-  - component: {fileID: 1560939612}
   m_Layer: 0
-  m_Name: ShortMovable
-  m_TagString: Platform
+  m_Name: JumpIncreaser
+  m_TagString: JumpIncrease
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,9 +73,9 @@ SpriteShapeRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
   m_MaskInteraction: 0
-  m_ShapeTexture: {fileID: 2800000, guid: 4dd8823b4bb091143a6b0e15ba45a97a, type: 3}
+  m_ShapeTexture: {fileID: 2800000, guid: c9b7dac81b824674e9bdafb415f43737, type: 3}
   m_Sprites: []
   m_LocalAABB:
     m_Center: {x: 3.0000002, y: -1.0000001, z: 0}
@@ -133,7 +131,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
-  m_SpriteShape: {fileID: 11400000, guid: 2cfd66aa65021c34ba15625560f4c56f, type: 2}
+  m_SpriteShape: {fileID: 11400000, guid: 3a8265ba8a101014b8b70a8135efd758, type: 2}
   m_FillPixelPerUnit: 100
   m_StretchTiling: 1
   m_SplineDetail: 16
@@ -174,40 +172,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.0000005, y: 2.0000002}
   m_EdgeRadius: 0
---- !u!50 &1560939613
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 266737502097550497}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!114 &1560939612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 266737502097550497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f080ef3586cf8f4d97fa615cf2a41f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveDistanceX: 0
-  moveDistanceY: 0
-  moveTime: 0
-  waitTime: 0

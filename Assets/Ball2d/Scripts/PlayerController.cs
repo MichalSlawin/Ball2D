@@ -5,20 +5,23 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float jumpForce = 500f;
+    [SerializeField] private float jumpForce = 10;
+    private float jumpMultiplier = 2;
     private Vector2 target;
     private bool isOnPlatform = false;
     private Vector2 respawn;
     private float fellOffPoint = -20f;
     private float fellOffPointUp = 50f;
     private int points = 0;
-    private float moveClickOffset = 1f;
+    private float moveClickOffset = 2f;
     Rigidbody2D playerRigidbody;
+    GameController gameController;
 
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = 60;
+        gameController = FindObjectOfType<GameController>();
+        if (gameController == null) throw new System.Exception("GameController not found");
 
         respawn = transform.position;
         playerRigidbody = transform.gameObject.GetComponent<Rigidbody2D>();
@@ -47,7 +50,7 @@ public class PlayerController : MonoBehaviour
     {
         GameObject collisionObj = collision.gameObject;
 
-        if (collisionObj.CompareTag("Platform"))
+        if (collisionObj.CompareTag("Platform") || collisionObj.CompareTag("JumpIncrease"))
         {
             isOnPlatform = true;
         }
@@ -59,12 +62,17 @@ public class PlayerController : MonoBehaviour
 
         if (collisionObj.CompareTag("Finish"))
         {
-            Debug.Log("score: " + points);
+            gameController.LoadNextLevel();
         }
 
         if (collisionObj.CompareTag("GravityChange"))
         {
             playerRigidbody.gravityScale *= -1;
+        }
+
+        if (collisionObj.CompareTag("JumpIncrease"))
+        {
+            jumpForce *= jumpMultiplier;
         }
     }
 
@@ -72,10 +80,14 @@ public class PlayerController : MonoBehaviour
     {
         GameObject collisionObj = collision.gameObject;
 
-        if (collisionObj.CompareTag("Platform"))
+        if (collisionObj.CompareTag("Platform") || collisionObj.CompareTag("JumpIncrease"))
         {
             isOnPlatform = false;
-            Debug.Log("platform exit");
+        }
+
+        if (collisionObj.CompareTag("JumpIncrease"))
+        {
+            jumpForce /= jumpMultiplier;
         }
     }
 
@@ -128,7 +140,9 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (GetClickedObjTag() == "Player" && isOnPlatform)
+            target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            if ((GetClickedObjTag() == "Player" || (target.x > transform.position.x - moveClickOffset && target.x < transform.position.x + moveClickOffset)) && isOnPlatform)
             {
                 float direction = 1;
                 if (playerRigidbody.gravityScale < 0) direction = -1;

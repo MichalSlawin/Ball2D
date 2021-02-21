@@ -8,6 +8,7 @@ TagManager:
   - Point
   - Death
   - GravityChange
+  - JumpIncrease
   layers:
   - Default
   - TransparentFX

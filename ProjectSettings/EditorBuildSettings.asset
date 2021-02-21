@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Ball2d/Scenes/Level1Scene.unity
+    guid: af238a57ffd30824f8e10c66decd85ac
+  - enabled: 1
+    path: Assets/Ball2d/Scenes/Level2Scene.unity
+    guid: 9c784b7cc03f215419007aeb4ff0a4a8
+  - enabled: 1
+    path: Assets/Ball2d/Scenes/Level3Scene.unity
+    guid: 5b8cb87712cd4ec4d945788472e27010
+  - enabled: 1
+    path: Assets/Ball2d/Scenes/Level4Scene.unity
+    guid: 7095fe6d14e98b64d861d51d10ba3348
   m_configObjects: {}
