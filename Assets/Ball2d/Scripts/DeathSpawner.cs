@@ -17,8 +17,6 @@ public class DeathSpawner : MonoBehaviour
         if (player == null) throw new System.Exception("Player not found");
 
         SpawnBall();
-
-        Debug.Log(player.transform.position);
     }
 
     // Update is called once per frame
