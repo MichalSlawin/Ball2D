@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Ball2d/Scenes/Level6Scene.unity
     guid: 77a1a55cde7bc8e449437cf893e6b620
+  - enabled: 1
+    path: Assets/Ball2d/Scenes/Level7Scene.unity
+    guid: d5ed21871f6c79846bfee7177af9ea2a
   m_configObjects: {}

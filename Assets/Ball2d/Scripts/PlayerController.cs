@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     {
         GameObject collisionObj = collision.gameObject;
 
-        if (collisionObj.CompareTag("Platform") || collisionObj.CompareTag("JumpIncrease"))
+        if (collisionObj.CompareTag("Platform") || collisionObj.CompareTag("JumpIncrease") || collisionObj.CompareTag("GravityChange"))
         {
             isOnPlatform = true;
         }
@@ -79,23 +79,21 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 bounceRotation = collisionObj.transform.rotation.eulerAngles;
 
+            jumpForce *= jumpMultiplier;
             if (V3Equal(bounceRotation, new Vector3(0,0,45)))
             {
                 Jump(-jumpForce);
             }
             else if (V3Equal(bounceRotation, new Vector3(0, 0, 315))) // -45
             {
-                jumpForce *= jumpMultiplier;
                 Jump(jumpForce);
-                jumpForce /= jumpMultiplier;
             }
             else
             {
-                jumpForce *= jumpMultiplier;
                 Jump(0);
-                jumpForce /= jumpMultiplier;
             }
-            
+            jumpForce /= jumpMultiplier;
+
         }
     }
 
@@ -103,7 +101,7 @@ public class PlayerController : MonoBehaviour
     {
         GameObject collisionObj = collision.gameObject;
 
-        if (collisionObj.CompareTag("Platform") || collisionObj.CompareTag("JumpIncrease"))
+        if (collisionObj.CompareTag("Platform") || collisionObj.CompareTag("JumpIncrease") || collisionObj.CompareTag("GravityChange"))
         {
             isOnPlatform = false;
         }
