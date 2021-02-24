@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour
         playerRigidbody.gravityScale = 1;
         transform.position = respawn;
         points--;
+
+        gameController.RespawnGreatDeathBalls();
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -95,6 +97,11 @@ public class PlayerController : MonoBehaviour
             jumpForce /= jumpMultiplier;
 
         }
+
+        if (collisionObj.CompareTag("Death"))
+        {
+            HandleDeath();
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -130,6 +137,7 @@ public class PlayerController : MonoBehaviour
         if (collisionObj.CompareTag("Respawn"))
         {
             respawn = transform.position;
+            gameController.RespawnGoingLeftBalls();
         }
     }
 

@@ -31,4 +31,24 @@ public class GameController : MonoBehaviour
             SceneManager.LoadScene(nextLevelName);
         }
     }
+
+    public void RespawnGreatDeathBalls()
+    {
+        GreatDeathBall[] balls = FindObjectsOfType<GreatDeathBall>();
+
+        foreach(GreatDeathBall ball in balls)
+        {
+            ball.RespawnBall();
+        }
+    }
+
+    public void RespawnGoingLeftBalls()
+    {
+        GreatDeathBall[] balls = FindObjectsOfType<GreatDeathBall>();
+
+        foreach (GreatDeathBall ball in balls)
+        {
+            ball.RespawnAndGoLeft();
+        }
+    }
 }
