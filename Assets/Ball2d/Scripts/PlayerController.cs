@@ -211,11 +211,11 @@ public class PlayerController : MonoBehaviour
                 playerRigidbody.velocity = new Vector2(direction * moveSpeed, playerRigidbody.velocity.y);
             }
 
-        }
+            if(touch.phase == TouchPhase.Ended && GetClickedObjTag() != "Player" && !(target.x > transform.position.x - moveClickOffset && target.x < transform.position.x + moveClickOffset))
+            {
+                playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
+            }
 
-        if(Input.touchCount == 0)
-        {
-            playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
         }
     }
 

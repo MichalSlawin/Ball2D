@@ -13,10 +13,9 @@ public class GameController : MonoBehaviour
         Application.targetFrameRate = 60;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GoToMenu()
     {
-        
+        SceneManager.LoadScene("MenuScene");
     }
 
     public void LoadNextLevel()
