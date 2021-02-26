@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Ball2d/Scenes/MenuScene.unity
+    guid: a75c99e64e920604db3cb67f93d766bc
+  - enabled: 1
     path: Assets/Ball2d/Scenes/Level1Scene.unity
     guid: af238a57ffd30824f8e10c66decd85ac
   - enabled: 1

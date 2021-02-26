@@ -30,7 +30,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleClick();
+        //HandleClick();
+        HandleTouch();
 
         if(transform.position.y < fellOffPoint || transform.position.y > fellOffPointUp)
         {
@@ -175,6 +176,46 @@ public class PlayerController : MonoBehaviour
             {
                 Jump(0);
             }
+        }
+    }
+
+    private void HandleTouch()
+    {
+        if(Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            Vector2 target = Camera.main.ScreenToWorldPoint(touch.position);
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                if ((GetClickedObjTag() == "Player" || (target.x > transform.position.x - moveClickOffset && target.x < transform.position.x + moveClickOffset)) && isOnPlatform)
+                {
+                    Jump(0);
+                }
+            }
+
+            if (GetClickedObjTag() != "Player")
+            {
+                Transform parent = transform.parent;
+                if (parent != null)
+                {
+                    transform.parent = null;
+                }
+
+                float direction = 0;
+                if (target.x > transform.position.x + moveClickOffset) direction = 1;
+                else if (target.x < transform.position.x - moveClickOffset) direction = -1;
+
+                transform.parent = parent;
+
+                playerRigidbody.velocity = new Vector2(direction * moveSpeed, playerRigidbody.velocity.y);
+            }
+
+        }
+
+        if(Input.touchCount == 0)
+        {
+            playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
         }
     }
 
