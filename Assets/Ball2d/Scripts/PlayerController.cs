@@ -179,22 +179,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private string GetClickedObjTag()
+    {
+        target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(target, Vector2.zero);
+
+        if (hit.collider != null)
+        {
+            return hit.collider.gameObject.tag;
+        }
+
+        return "";
+    }
+
     private void HandleTouch()
     {
         if(Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            Vector2 target = Camera.main.ScreenToWorldPoint(touch.position);
+            target = Camera.main.ScreenToWorldPoint(touch.position);
 
             if (touch.phase == TouchPhase.Began)
             {
-                if ((GetClickedObjTag() == "Player" || (target.x > transform.position.x - moveClickOffset && target.x < transform.position.x + moveClickOffset)) && isOnPlatform)
+                if ((GetTouchedObject() == "Player" || (target.x > transform.position.x - moveClickOffset && target.x < transform.position.x + moveClickOffset)) && isOnPlatform)
                 {
                     Jump(0);
                 }
             }
 
-            if (GetClickedObjTag() != "Player")
+            if (GetTouchedObject() != "Player")
             {
                 Transform parent = transform.parent;
                 if (parent != null)
@@ -211,7 +224,7 @@ public class PlayerController : MonoBehaviour
                 playerRigidbody.velocity = new Vector2(direction * moveSpeed, playerRigidbody.velocity.y);
             }
 
-            if(touch.phase == TouchPhase.Ended && GetClickedObjTag() != "Player" && !(target.x > transform.position.x - moveClickOffset && target.x < transform.position.x + moveClickOffset))
+            if(touch.phase == TouchPhase.Ended && GetTouchedObject() != "Player" && !(target.x > transform.position.x - moveClickOffset && target.x < transform.position.x + moveClickOffset))
             {
                 playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
             }
@@ -219,9 +232,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private string GetClickedObjTag()
+    private string GetTouchedObject()
     {
-        target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(target, Vector2.zero);
 
         if (hit.collider != null)
