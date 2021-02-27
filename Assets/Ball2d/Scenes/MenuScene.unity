@@ -1425,7 +1425,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 609162435}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1814,7 +1814,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b2bde69dc0f91948abcc283d481d94e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelsCount: 8
 --- !u!4 &933984173
 Transform:
   m_ObjectHideFlags: 0
