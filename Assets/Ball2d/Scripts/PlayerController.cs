@@ -199,12 +199,10 @@ public class PlayerController : MonoBehaviour
             Touch touch = Input.GetTouch(0);
             target = Camera.main.ScreenToWorldPoint(touch.position);
 
-            if (touch.phase == TouchPhase.Began)
+
+            if (((GetTouchedObject() == "Player" || (target.x > transform.position.x - moveClickOffset && target.x < transform.position.x + moveClickOffset)) || Input.touchCount > 1) && isOnPlatform)
             {
-                if ((GetTouchedObject() == "Player" || (target.x > transform.position.x - moveClickOffset && target.x < transform.position.x + moveClickOffset)) && isOnPlatform)
-                {
-                    Jump(0);
-                }
+                Jump(0);
             }
 
             if (GetTouchedObject() != "Player")
