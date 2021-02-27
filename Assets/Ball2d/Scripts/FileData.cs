@@ -10,7 +10,7 @@ public class FileData
 
     public FileData()
     {
-        for(int i = 1; i < GameData.GetLevelsCount(); i++)
+        for(int i = 1; i <= GameData.GetLevelsCount(); i++)
         {
             starsInLevels[i] = 0;
         }
@@ -21,9 +21,15 @@ public class FileData
         return starsInLevels;
     }
 
+    public int GetStarsInLevelNum(int levelNum)
+    {
+        return starsInLevels[levelNum];
+    }
+
     public void SetStarsInLevel(int level, int stars)
     {
-        starsInLevels[level] = stars;
+        if(stars > starsInLevels[level])
+            starsInLevels[level] = stars;
     }
 
     public int UnlockedLevelNum

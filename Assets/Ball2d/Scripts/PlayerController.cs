@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private float fellOffPoint = -20f;
     private float fellOffPointUp = 50f;
     private int points = 0;
+    private int deaths = 0;
     private float moveClickOffset = 2f;
     Rigidbody2D playerRigidbody;
     GameController gameController;
@@ -44,8 +45,7 @@ public class PlayerController : MonoBehaviour
         playerRigidbody.velocity = Vector2.zero;
         playerRigidbody.gravityScale = 1;
         transform.position = respawn;
-        points--;
-
+        deaths++;
         gameController.RespawnGreatDeathBalls();
     }
 
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
         if (collisionObj.CompareTag("Finish"))
         {
-            gameController.LoadNextLevel();
+            gameController.FinishLevel(points, deaths);
         }
 
         if (collisionObj.CompareTag("GravityChange"))

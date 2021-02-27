@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,12 +19,32 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene("MenuScene");
     }
 
+    public void FinishLevel(int points, int deaths)
+    {
+        string currSceneName = SceneManager.GetActiveScene().name;
+        int currLevelNum =  (int)Char.GetNumericValue(currSceneName[5]);
+        GameData.FileData.UnlockedLevelNum = currLevelNum + 1;
+
+        int stars = 1;
+        if(points == 5)
+        {
+            stars = 2;
+            if(deaths == 0)
+            {
+                stars = 3;
+            }
+        }
+        GameData.FileData.SetStarsInLevel(currLevelNum, stars);
+
+        GameData.SaveFile();
+        LoadNextLevel();
+    }
+
     public void LoadNextLevel()
     {
         if(nextLevelName == "")
         {
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            Application.Quit();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         else
         {

@@ -15,12 +15,6 @@ public class MenuController : MonoBehaviour
         GetFileData();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void GetFileData()
     {
         FileData fileData = GameData.LoadFile();
@@ -74,6 +68,40 @@ public class MenuController : MonoBehaviour
             startLevelButton.GetComponent<Image>().enabled = true;
             startLevelButton.GetComponent<Button>().enabled = true;
             stbChild.gameObject.GetComponent<TextMeshProUGUI>().text = "Start";
+        }
+        SetStarsColors();
+    }
+
+    public void SetStarsColors()
+    {
+        Color32 yellow = new Color32(224, 210, 0, 255);
+        Color32 grey = new Color32(51, 51, 51, 255);
+
+        GameObject star1 = GameObject.Find("Star1");
+        if (star1 == null) throw new System.Exception("Star1 not found");
+        star1.GetComponent<Image>().color = grey;
+
+        GameObject star2 = GameObject.Find("Star2");
+        if (star2 == null) throw new System.Exception("Star2 not found");
+        star2.GetComponent<Image>().color = grey;
+
+        GameObject star3 = GameObject.Find("Star3");
+        if (star3 == null) throw new System.Exception("Star3 not found");
+        star3.GetComponent<Image>().color = grey;
+
+        if (GameData.FileData.GetStarsInLevelNum(visibleLevelNum) > 0)
+        {
+            star1.GetComponent<Image>().color = yellow;
+
+            if(GameData.FileData.GetStarsInLevelNum(visibleLevelNum) > 1)
+            {
+                star2.GetComponent<Image>().color = yellow;
+
+                if (GameData.FileData.GetStarsInLevelNum(visibleLevelNum) > 2)
+                {
+                    star3.GetComponent<Image>().color = yellow;
+                }
+            }
         }
     }
 }
