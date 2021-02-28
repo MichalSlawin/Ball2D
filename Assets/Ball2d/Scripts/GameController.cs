@@ -8,15 +8,15 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] private string nextLevelName = "";
 
+    private UIController uIController;
+
     // Start is called before the first frame update
     void Start()
     {
         Application.targetFrameRate = 60;
-    }
 
-    public void GoToMenu()
-    {
-        SceneManager.LoadScene("MenuScene");
+        uIController = FindObjectOfType<UIController>();
+        if (uIController == null) throw new System.Exception("UIController not found");
     }
 
     public void FinishLevel(int points, int deaths)
@@ -37,7 +37,9 @@ public class GameController : MonoBehaviour
         GameData.FileData.SetStarsInLevel(currLevelNum, stars);
 
         GameData.SaveFile();
-        LoadNextLevel();
+
+        uIController.PauseGame();
+        uIController.ShowFinishedLevelMenu(stars);
     }
 
     public void LoadNextLevel()

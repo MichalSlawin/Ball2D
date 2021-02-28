@@ -1736,31 +1736,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4846069170257106238, guid: ec593a2208a45fa4a9c51ff19522c735,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4846069170257106238, guid: ec593a2208a45fa4a9c51ff19522c735,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4846069170257106238, guid: ec593a2208a45fa4a9c51ff19522c735,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4846069170257106238, guid: ec593a2208a45fa4a9c51ff19522c735,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 845694538}
-    - target: {fileID: 4846069170257106238, guid: ec593a2208a45fa4a9c51ff19522c735,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToMenu
-      objectReference: {fileID: 0}
     - target: {fileID: 4846069171680462852, guid: ec593a2208a45fa4a9c51ff19522c735,
         type: 3}
       propertyPath: m_Name
