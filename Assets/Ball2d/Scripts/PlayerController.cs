@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private AudioClip coinSound = null;
+    [SerializeField] private AudioClip hitSound = null;
+    [SerializeField] private AudioClip jumpSound = null;
+
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 10;
     private float jumpMultiplier = 2;
@@ -17,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private float moveClickOffset = 2f;
     Rigidbody2D playerRigidbody;
     GameController gameController;
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +30,12 @@ public class PlayerController : MonoBehaviour
         if (gameController == null) throw new System.Exception("GameController not found");
 
         respawn = transform.position;
+
         playerRigidbody = transform.gameObject.GetComponent<Rigidbody2D>();
+        if (playerRigidbody == null) throw new System.Exception("Rigidbody2D not found");
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) throw new System.Exception("AudioSource not found");
     }
 
     // Update is called once per frame
@@ -42,6 +52,9 @@ public class PlayerController : MonoBehaviour
 
     private void HandleDeath()
     {
+        audioSource.clip = hitSound;
+        audioSource.Play();
+
         playerRigidbody.velocity = Vector2.zero;
         playerRigidbody.gravityScale = 1;
         transform.position = respawn;
@@ -126,6 +139,9 @@ public class PlayerController : MonoBehaviour
 
         if (collisionObj.CompareTag("Point"))
         {
+            audioSource.clip = coinSound;
+            audioSource.Play();
+
             Destroy(collisionObj);
             points++;
         }
@@ -244,6 +260,9 @@ public class PlayerController : MonoBehaviour
 
     private void Jump(float xValue)
     {
+        audioSource.clip = jumpSound;
+        audioSource.Play();
+
         float direction = 1;
         if (playerRigidbody.gravityScale < 0) direction = -1;
         playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x + xValue, jumpForce * direction);
