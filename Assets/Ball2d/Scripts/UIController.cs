@@ -69,5 +69,6 @@ public class UIController : MonoBehaviour
     public void LoadNextLevel()
     {
         gameController.LoadNextLevel();
+        ResumeGame();
     }
 }
