@@ -22,7 +22,15 @@ public class GameController : MonoBehaviour
     public void FinishLevel(int points, int deaths)
     {
         string currSceneName = SceneManager.GetActiveScene().name;
-        int currLevelNum =  (int)Char.GetNumericValue(currSceneName[5]);
+
+        string currNumStr = "";
+        for (int i = 0; i < currSceneName.Length; i++)
+        {
+            if (Char.IsDigit(currSceneName[i]))
+                currNumStr += currSceneName[i];
+        }
+
+        int currLevelNum =  int.Parse(currNumStr);
         GameData.FileData.UnlockedLevelNum = currLevelNum + 1;
 
         int stars = 1;

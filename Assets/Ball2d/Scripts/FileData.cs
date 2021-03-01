@@ -23,7 +23,17 @@ public class FileData
 
     public int GetStarsInLevelNum(int levelNum)
     {
-        return starsInLevels[levelNum];
+        int stars = 0;
+        try
+        {
+            stars = starsInLevels[levelNum];
+        }
+        catch(KeyNotFoundException)
+        {
+            starsInLevels[levelNum] = 0;
+        }
+
+        return stars;
     }
 
     public void SetStarsInLevel(int level, int stars)

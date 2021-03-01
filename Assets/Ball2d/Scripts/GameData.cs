@@ -7,7 +7,7 @@ using UnityEngine;
 public static class GameData
 {
     private const string filename = "/gameData.dat";
-    private const int levelsCount = 9;
+    private const int levelsCount = 10;
     private static FileData fileData = new FileData();
     
     public static FileData FileData { get => fileData; set => fileData = value; }
