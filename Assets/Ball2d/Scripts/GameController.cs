@@ -3,12 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using GoogleMobileAds.Api;
 
 public class GameController : MonoBehaviour
 {
     [SerializeField] private string nextLevelName = "";
 
     private UIController uIController;
+    private int currentLevelNum = 0;
+    private bool levelFinished = false;
+
+    private InterstitialAd interstitial;
 
     // Start is called before the first frame update
     void Start()
@@ -17,9 +22,41 @@ public class GameController : MonoBehaviour
 
         uIController = FindObjectOfType<UIController>();
         if (uIController == null) throw new System.Exception("UIController not found");
+
+        SetCurrentLevelNum();
+
+        LoadAds();
+
+        Time.timeScale = 1;
     }
 
-    public void FinishLevel(int points, int deaths)
+    private void Update()
+    {
+        if(levelFinished && Time.timeScale == 1)
+        {
+            Time.timeScale = 0;
+        }
+    }
+
+    private void LoadAds()
+    {
+        // Initialize an InterstitialAd.
+        interstitial = new InterstitialAd(SecretData.adUnitIdTest); // !!! REMEMBER TO SWITCH TO MY ID !!!
+        // Create an empty ad request.
+        AdRequest request = new AdRequest.Builder().Build();
+        // Load the interstitial with the request.
+        interstitial.LoadAd(request);
+    }
+
+    private void ShowAd()
+    {
+        if (interstitial.IsLoaded())
+        {
+            interstitial.Show();
+        }
+    }
+
+    private void SetCurrentLevelNum()
     {
         string currSceneName = SceneManager.GetActiveScene().name;
 
@@ -30,8 +67,12 @@ public class GameController : MonoBehaviour
                 currNumStr += currSceneName[i];
         }
 
-        int currLevelNum =  int.Parse(currNumStr);
-        GameData.FileData.UnlockedLevelNum = currLevelNum + 1;
+        currentLevelNum = int.Parse(currNumStr);
+    }
+
+    public void FinishLevel(int points, int deaths)
+    {
+        GameData.FileData.UnlockedLevelNum = currentLevelNum + 1;
 
         int stars = 1;
         if(points == 5)
@@ -42,12 +83,19 @@ public class GameController : MonoBehaviour
                 stars = 3;
             }
         }
-        GameData.FileData.SetStarsInLevel(currLevelNum, stars);
+        GameData.FileData.SetStarsInLevel(currentLevelNum, stars);
 
         GameData.SaveFile();
 
         uIController.PauseGame();
         uIController.ShowFinishedLevelMenu(stars);
+
+        levelFinished = true;
+
+        if (currentLevelNum % 2 == 0)
+        {
+            ShowAd();
+        }
     }
 
     public void LoadNextLevel()

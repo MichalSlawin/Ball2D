@@ -73,3 +73,6 @@ crashlytics-build.properties
 connectwebgl.zip
 webgl_sharing
 com.unity.connect.share
+
+SecretData.cs
+SecretData.cs.meta

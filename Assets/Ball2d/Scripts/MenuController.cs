@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using GoogleMobileAds.Api;
 
 public class MenuController : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class MenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Initialize the Google Mobile Ads SDK.
+        MobileAds.Initialize(initStatus => { });
+
         Application.targetFrameRate = 60;
         GetFileData();
     }
