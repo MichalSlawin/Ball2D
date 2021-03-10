@@ -41,7 +41,7 @@ public class GameController : MonoBehaviour
     private void LoadAds()
     {
         // Initialize an InterstitialAd.
-        interstitial = new InterstitialAd(SecretData.adUnitIdTest); // !!! REMEMBER TO SWITCH TO MY ID !!!
+        interstitial = new InterstitialAd(SecretData.adUnitId);
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
         // Load the interstitial with the request.
